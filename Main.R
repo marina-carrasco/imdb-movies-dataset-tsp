@@ -10,7 +10,6 @@ movtib <- tibble(movies, )
 movtib <- movtib[complete.cases(movtib),]
 movtib
 
-mutate(Gross = as.integer(Gross))
-
+movtib <- mutate(movtib, Gross = as.numeric(gsub(",", "", Gross)))
 # Data cleaning
-filter(movtib, Gross>=0)
+View(filter(movtib, Gross >= 0))
