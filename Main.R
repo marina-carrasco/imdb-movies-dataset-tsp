@@ -2,14 +2,28 @@ install.packages(c("tibble", "dplyr"))
 library(tibble)
 library(dplyr)
 
+# Data Loading
+movies <- read.csv(file="imdb_top_1000.csv", na.strings = "")
+movtib <- tibble(movies)
 
-movies <- read.csv(file="imdb_top_1000.csv", na.strings = c("", "NA"))
-movies
+# Data Cleaning
+  # Missing Values
+movtib <- na.omit(movtib)
+movtib <- filter(movtib, Gross >= 0 & Released_Year >= 1888 & Released_Year <= 2026
+                 & IMDB_Rating >= 0 & IMDB_Rating <= 10 & Meta_score >= 0 & Meta_score <= 100
+                 & No_of_Votes >= 0)
 
-movtib <- tibble(movies, )
-movtib <- movtib[complete.cases(movtib),]
-movtib
-
+  # Correcting Types
 movtib <- mutate(movtib, Gross = as.numeric(gsub(",", "", Gross)))
-# Data cleaning
-View(filter(movtib, Gross >= 0))
+#Convertir runtime a int????
+#Released Year a date
+#Certificate factor
+
+  # Outliers
+
+  # Duplicates And Inconsistencies
+
+
+#Para ver la info bien
+View(movtib)
+
