@@ -23,6 +23,7 @@ movtib <- mutate(movtib, Gross = as.numeric(gsub(",", "", Gross)))
 #Convertir runtime a int????
 #Released Year a date
 #Certificate factor
+#Convertir las estrellas en un c()???
 
 
 #Para ver la info bien
