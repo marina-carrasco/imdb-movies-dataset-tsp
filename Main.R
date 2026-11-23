@@ -1,7 +1,8 @@
-install.packages(c("tibble", "dplyr", "shiny"))
+install.packages(c("tibble", "dplyr", "shiny", "lubridate"))
 library(shiny)
 library(tibble)
 library(dplyr)
+library(lubridate)
 
 # Data Loading
 movies <- read.csv(file="imdb_top_1000.csv", na.strings = "")
@@ -34,6 +35,9 @@ movtib <- mutate(movtib, Runtime = as.integer(gsub("min", "", Runtime)))
 
 
 #Released Year a date
+
+movtib$Released_Year <- as.integer(movtib$Released_Year)
+
 #Certificate factor
 #Convertir las estrellas en un c()???
 
