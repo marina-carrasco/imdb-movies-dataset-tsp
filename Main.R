@@ -1,4 +1,5 @@
-install.packages(c("tibble", "dplyr"))
+install.packages(c("tibble", "dplyr", "shiny"))
+library(shiny)
 library(tibble)
 library(dplyr)
 
@@ -18,6 +19,7 @@ movtib <- filter(movtib, Gross >= 0 & Released_Year >= 1888 & Released_Year <= 2
   # Duplicates And Inconsistencies
 
 # Data Tansformation
+
   # Correcting Types
 movtib <- mutate(movtib, Gross = as.numeric(gsub(",", "", Gross)))
 #Convertir runtime a int????
@@ -25,6 +27,21 @@ movtib <- mutate(movtib, Gross = as.numeric(gsub(",", "", Gross)))
 #Certificate factor
 #Convertir las estrellas en un c()???
 
+
+# Web App
+ui <- fluidPage(
+  "imdb movies",
+  selectInput("color", "Choose a color", choices = c("pink", "purple", "gray")),
+  plotOutput("hist")
+)
+
+server <- function(input, output, session) {
+  output$hist <- renderPlot({
+    hist(movtib$Gross, main= "Movies by gross income", col = input$color)
+  })
+}
+
+shinyApp(ui, server)
 
 #Para ver la info bien
 View(movtib)
