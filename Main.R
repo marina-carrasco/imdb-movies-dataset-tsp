@@ -16,13 +16,23 @@ movtib <- filter(movtib, Gross >= 0 & Released_Year >= 1888 & Released_Year <= 2
 
   # Outliers
 
+
+
+
   # Duplicates And Inconsistencies
+
+
+
 
 # Data Tansformation
 
   # Correcting Types
 movtib <- mutate(movtib, Gross = as.numeric(gsub(",", "", Gross)))
 #Convertir runtime a int????
+
+movtib <- mutate(movtib, Runtime = as.integer(gsub("min", "", Runtime)))
+
+
 #Released Year a date
 #Certificate factor
 #Convertir las estrellas en un c()???
@@ -45,3 +55,4 @@ shinyApp(ui, server)
 
 #Para ver la info bien
 View(movtib)
+
